@@ -22,7 +22,7 @@ class SongService {
    * @returns {Promise<Array>}
    */
   async getAllSongs () {
-    return [];
+    return this.collection.find().toArray();
   }
 
   /**
@@ -33,7 +33,9 @@ class SongService {
    * @returns chanson correspondant à l'id
    */
   async getSongById (id) {
-    return { id: -1 };
+    const songs = this.getAllSongs();
+    const song = (await songs).find((song) => song.id === id);
+    return song;
   }
 
   /**
