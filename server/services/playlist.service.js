@@ -47,10 +47,9 @@ class PlaylistService {
    * @returns retourne la playlist ajoutée
    */
   async addPlaylist (playlist) {
-    const playlists = await this.getAllPlaylists();
     playlist.id = randomUUID();
     await this.savePlaylistThumbnail(playlist);
-    playlists.push(playlist);
+    this.collection.insertOne(playlist);
     return playlist;
   }
 
@@ -62,10 +61,12 @@ class PlaylistService {
   async updatePlaylist (playlist) {
     delete playlist._id; // _id est immutable
     await this.savePlaylistThumbnail(playlist);
-    const playlists = await this.getAllPlaylists();
-    const playlistPosition = playlists.findIndex((searchPlaylist) => searchPlaylist.id === playlist.id);
-    playlists[playlistPosition] = playlist;
-    this.fileSystemManager.writeToJsonFile(this.JSON_PATH, JSON.stringify({ playlists }));
+    // const playlists = await this.getAllPlaylists();
+    // const playlistPosition = playlists.findIndex((searchPlaylist) => searchPlaylist.id === playlist.id);
+    // playlists[playlistPosition] = playlist;
+
+    // this.collection.updateOne({ _id: playlist._id }, { playlist });
+    this.collection.findOneAndReplace({ _id: playlist._id }, {playlist});
   }
 
   /**
