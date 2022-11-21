@@ -8,9 +8,9 @@ class DatabaseService {
    * @param {Array} data tableau contenant les documents à mettre dans la collection
    */
   async populateDb (collectionName, data) {
-    let collection = this.db.collection(collectionName);
-    if (collection.countDocuments() != 0){
-      collection.insertMany(data);
+    const collection = this.db.collection(collectionName);
+    if ((await collection.countDocuments()) === 0){
+      await collection.insertMany(data);
     }
   }
 
