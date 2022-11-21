@@ -61,12 +61,7 @@ class PlaylistService {
   async updatePlaylist (playlist) {
     delete playlist._id; // _id est immutable
     await this.savePlaylistThumbnail(playlist);
-    // const playlists = await this.getAllPlaylists();
-    // const playlistPosition = playlists.findIndex((searchPlaylist) => searchPlaylist.id === playlist.id);
-    // playlists[playlistPosition] = playlist;
-
-    // this.collection.updateOne({ _id: playlist._id }, { playlist });
-    this.collection.findOneAndReplace({ _id: playlist._id }, {playlist});
+    await this.collection.findOneAndReplace({ id: playlist.id }, playlist);
   }
 
   /**
