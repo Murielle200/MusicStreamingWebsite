@@ -22,7 +22,7 @@ class PlaylistService {
    * @returns {Promise<Array>} la liste de toutes les playlists
    */
   async getAllPlaylists () {
-    return [];
+    return this.collection.find().toArray();
   }
 
   /**
@@ -32,7 +32,12 @@ class PlaylistService {
    * @returns Retourne la playlist en fonction de son id
    */
   async getPlaylistById (id) {
-    return { id: -1 };
+    const allPlaylists = await this.getAllPlaylists();
+    const playlist = allPlaylists.find((playlist) => playlist.id === id);
+    if (playlist === undefined) {
+      return null;
+    }
+    return playlist;
   }
 
   /**
@@ -42,8 +47,10 @@ class PlaylistService {
    * @returns retourne la playlist ajoutée
    */
   async addPlaylist (playlist) {
+    const playlists = await this.getAllPlaylists();
     playlist.id = randomUUID();
     await this.savePlaylistThumbnail(playlist);
+    playlists.push(playlist);
     return playlist;
   }
 
@@ -55,6 +62,10 @@ class PlaylistService {
   async updatePlaylist (playlist) {
     delete playlist._id; // _id est immutable
     await this.savePlaylistThumbnail(playlist);
+    const playlists = await this.getAllPlaylists();
+    const playlistPosition = playlists.findIndex((searchPlaylist) => searchPlaylist.id === playlist.id);
+    playlists[playlistPosition] = playlist;
+    this.fileSystemManager.writeToJsonFile(this.JSON_PATH, JSON.stringify({ playlists }));
   }
 
   /**

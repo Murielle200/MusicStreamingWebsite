@@ -9,8 +9,8 @@ class DatabaseService {
    */
   async populateDb (collectionName, data) {
     let collection = this.db.collection(collectionName);
-    if (collection.countDocuments() != 0){
-      collection.insertMany(data);
+    if (collection.countDocuments() !== 0){
+      await collection.insertMany(data);
     }
   }
 
