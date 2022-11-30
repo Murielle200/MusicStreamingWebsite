@@ -12,9 +12,10 @@ export default function Index() {
     api
       .fetchAllPlaylists()
       .then((playlists) => setPlaylists(playlists))
-      .catch(() => setPlaylists([]));
+      .catch(() => setPlaylists([]))
+      .fetchAllSongs();
     // TODO : récupérer les chansons du serveur
-  }, []);
+  }, []); // tableau dependance vide = hook depend de aucune autre valeur
 
   /**
    * TODO : implémenter la recherche et la mise à jour de l'interface
