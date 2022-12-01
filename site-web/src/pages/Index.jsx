@@ -13,8 +13,12 @@ export default function Index() {
       .fetchAllPlaylists()
       .then((playlists) => setPlaylists(playlists))
       .catch(() => setPlaylists([]))
-      .fetchAllSongs();
-    // TODO : récupérer les chansons du serveur
+
+      // TODO : récupérer les chansons du serveur
+      .fetchAllSongs()
+      .then((songs) => setSongs(songs)) // promise
+      .catch(() => setSongs([]));
+
   }, []); // tableau dependance vide = hook depend de aucune autre valeur
 
   /**
@@ -28,12 +32,19 @@ export default function Index() {
   const handleSearch = async (event, query, exactMatch) => {
     event.preventDefault();
     // TODO : implémenter la recherche et la mise à jour de l'interface
+    // DONE
+    const searchResults = await api.search(query, exactMatch);
+    this.setPlaylists(searchResults.playlists);
+    this.setSongs(searchResults.songs);
   };
 
   return (
     <>
       <main id="main-area" className="flex-column">
-        {/*TODO : ajouter la barre de recherche*/}
+        {/*TODO : ajouter la barre de recherche*/ 
+        // DONE
+        SearchBar
+        }
         <div id="playlist-list">
           <h1>Mes Playlists</h1>
           <section id="playlist-container" className="playlist-container">
@@ -44,7 +55,13 @@ export default function Index() {
         </div>
         <div id="songs-list">
           <h1>Mes Chansons</h1>
-          {/*TODO : afficher les chansons dans la page*/}
+          <section id="song-container" className="flex-column">
+            {/*TODO : afficher les chansons dans la page*/
+            // DONE
+            songs.map((song) => (
+              < Song key={song.id} song={song} />
+            ) )}            
+          </section>
         </div>
       </main>
     </>

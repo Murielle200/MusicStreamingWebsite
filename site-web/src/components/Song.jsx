@@ -16,7 +16,7 @@ export default function Song({ song, index }) {
     <section
       className="song-item flex-row"
       onClick={() => {
-        {/*TODO : joueur une chanson seulement si index existe */}
+        {/*TODO : jouer une chanson seulement si index existe */}
         playSong();
       }}
     >

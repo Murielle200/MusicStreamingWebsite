@@ -3,6 +3,7 @@ import { SERVER_URL } from "../assets/js/consts";
 import { NavLink } from "react-router-dom";
 
 export default function Playlist({ playlist }) {
+  
   return (
     <NavLink className="playlist-item flex-column" to={`/playlist/${playlist.id}`}>
       <div className="playlist-preview">
@@ -16,3 +17,5 @@ export default function Playlist({ playlist }) {
     </NavLink>
   );
 }
+
+
