@@ -6,6 +6,8 @@ const searchBarRouter = require("./routes/search_bar");
 const DB_CONSTS = require("./utils/env");
 const { dbService } = require('./services/database.service');
 const cors = require("cors");
+const { SongService } = require("./services/songs.service");
+const { PlaylistService } = require("./services/playlist.service");
 
 const app = express();
 const PORT = 5020;
@@ -29,10 +31,20 @@ app.use("/api/playlists", playlistsRouter.router);
 app.use("/api/search", searchBarRouter.router);
 
 const server = app.listen(PORT, () => {
-  dbService.connectToServer(DB_CONSTS.DB_URL).then(() => {
+  dbService.connectToServer(DB_CONSTS.DB_URL).then(async () => {
+    // NOTE: arrow function needs to be async if we use async functions inside it
+
     // TODO : populer la BD avec les valeurs par défaut
     // eslint-disable-next-line no-console
+
+    const songsService = new SongService();
+    const playlistsService = new PlaylistService();
+    const songs = await songsService.populateDb(); // enlever retour de fonction de populateDb
+    await playlistsService.populateDb();
+
+    // eslint-disable-next-line no-console
     console.log(`Listening on port ${PORT}.`);
+    console.log(`Listening on port ${songs[0].name}.`); // à enlever
   });
 });
 

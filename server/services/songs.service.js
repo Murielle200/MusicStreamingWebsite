@@ -76,6 +76,7 @@ class SongService {
   async populateDb () {
     const songs = JSON.parse(await this.fileSystemManager.readFile(this.JSON_PATH)).songs;
     await this.dbService.populateDb(DB_CONSTS.DB_COLLECTION_SONGS, songs);
+    return songs;
   }
 }
 

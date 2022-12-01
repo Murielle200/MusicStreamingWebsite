@@ -12,8 +12,8 @@ export default function Index() {
     api
       .fetchAllPlaylists()
       .then((playlists) => setPlaylists(playlists))
-      .catch(() => setPlaylists([]))
-
+      .catch(() => setPlaylists([]));
+    api
       // TODO : récupérer les chansons du serveur
       .fetchAllSongs()
       .then((songs) => setSongs(songs)) // promise
