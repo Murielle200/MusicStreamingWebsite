@@ -40,7 +40,15 @@ export default function CreatePlaylist() {
     event.preventDefault();
     if (!data.name || !data.description || !data.thumbnail) return;
     // TODO : envoyer la bonne requête pour ajouter ou modifier une playlist en fonction de l'attribut params.id
+    // DONE
+
     navigate("/index");
+    if(!params.id) {
+      await api.addNewPlaylist(data);
+    }
+    else {
+      await api.updatePlaylist(data);
+    }
   };
 
   const addItemSelect = (event) => {
@@ -96,10 +104,20 @@ export default function CreatePlaylist() {
   };
 
   // TODO : Gérer le changement de nom
-  const handleNameChange = (event) => {};
+  // DONE
+  const handleNameChange = (event) => {
+    const changedName = event.target.value;
+    data.name = changedName;
+    setData({data, songs: songs}); // not sure
+  };
 
   // TODO : Gérer le changement de description
-  const handleDescriptionChange = (event) => {};
+  // DONE
+  const handleDescriptionChange = (event) => {
+    const changedDescription = event.target.value;
+    data.description = changedDescription;
+    setData({data, songs: songs}); // not sure
+  };
 
   const handleFileChange = async (event) => {
     setPreview(URL.createObjectURL(event.target.files[0]));
@@ -108,8 +126,10 @@ export default function CreatePlaylist() {
   };
 
   // TODO : Envoyer une requête de supression au serveur et naviguer vers la page principale
+  // DONE ?
   const deletePlaylist = async (id) => {
     navigate("/index");
+    await api.deletePlaylist(id);
   };
 
   const loadForEdit = async (playlist) => {
@@ -132,7 +152,9 @@ export default function CreatePlaylist() {
             <legend>Informations générales</legend>
             <div className="form-control flex-row">
               <label htmlFor="name">Nom: </label>
-              {/*TODO : lier au nom de la playlist */}
+              {/*TODO : lier au nom de la playlist */
+              
+              }
               <input
                 type="text"
                 id="name"

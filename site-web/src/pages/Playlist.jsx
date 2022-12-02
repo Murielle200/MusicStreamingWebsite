@@ -3,12 +3,12 @@ import { ACTIONS } from "../reducers/reducer";
 import PlaylistContext from "../contexts/PlaylistContext";
 import { SERVER_URL } from "../assets/js/consts";
 import { NavLink, useParams } from "react-router-dom";
+import Song from "../components/Song";
 
 export default function Playlist() {
   // TODO : récupérer une référence vers l'instance de HTTPManager
   // DONE
-  const context = useContext(PlaylistContext).playlist;
-  // change to .api?
+  const api = useContext(PlaylistContext).api;
 
   const params = useParams();
   const [playlist, setPlaylist] = useState({});
