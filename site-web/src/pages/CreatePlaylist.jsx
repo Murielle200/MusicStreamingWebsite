@@ -153,25 +153,27 @@ export default function CreatePlaylist() {
             <div className="form-control flex-row">
               <label htmlFor="name">Nom: </label>
               {/*TODO : lier au nom de la playlist */
-              
+              // DONE
               }
               <input
                 type="text"
                 id="name"
                 placeholder="Playlist#1"
-                value={"TODO"}
+                value={data.name}
                 required
                 onChange={handleNameChange}
               />
             </div>
             <div className="form-control flex-row">
               <label htmlFor="description">Description: </label>
-              {/*TODO : lier à la description de la playlist */}
+              {/*TODO : lier à la description de la playlist */
+              // DONE
+              }
               <input
                 type="text"
                 id="description"
                 placeholder="Nouvelle playlist"
-                value={"TODO"}
+                value={data.description}
                 required
                 onChange={handleDescriptionChange}
               />
@@ -185,9 +187,14 @@ export default function CreatePlaylist() {
         </div>
         <fieldset className="form-control">
           <legend>Chansons</legend>
-          {/*TODO : construire les choix de chansons dans des éléments <option> */}
+          {/*TODO : construire les choix de chansons dans des éléments <option> 
+          // NOT REALLY DONE */}
           <datalist id="song-dataList">
-            <option value={"Whip"} />
+            {songs.map((song) => (
+              <option value ={song.name}/>
+            ) )}
+            
+            {/* <option value={"Whip"} /> */}
           </datalist>
           <button id="add-song-btn" className="fa fa-plus" onClick={addItemSelect}></button>
           <div id="song-list">
@@ -208,7 +215,8 @@ export default function CreatePlaylist() {
             ))}
           </div>
         </fieldset>
-        {/*TODO : afficher "Modifier la playlist" ou "Ajouter la playlist" en fonction de l'état du formulaire */}
+        {/*TODO : afficher "Modifier la playlist" ou "Ajouter la playlist" en fonction de l'état du formulaire */
+        params.id ? "Modifier la playlist" : "Ajouter la playlist"}
         <input type="submit" value={"Ajouter la playlist"} onClick={handleSubmit} id="playlist-submit" />
       </form>
       {params.id ? (
