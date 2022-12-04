@@ -46,9 +46,9 @@ class SongService {
    * @returns {boolean} le nouveau état aimé de la chanson
    */
   async updateSongLike (id) {
-    let song = await this.getSongById(id);
+    const song = await this.getSongById(id);
     const newState = !song.liked;
-    this.collection.updateOne({_id: song._id}, {$set: {liked: newState}});
+    this.collection.updateOne({ _id: song._id }, { $set: { liked: newState } });
     return newState;
   }
 
@@ -64,10 +64,10 @@ class SongService {
    */
   async search (substring, exact) {
     let filter = {};
-    if(exact){
-      filter = { $or:[ {name: { $regex: `${substring}` }}, {artist: { $regex: `${substring}` }}, {genre: { $regex: `${substring}` }} ]};
+    if (exact) {
+      filter = { $or: [{ name: { $regex: `${substring}` } }, { artist: { $regex: `${substring}` } }, { genre: { $regex: `${substring}` } }] };
     } else {
-      filter = { $or: [{name: { $regex: `${substring}`, $options: "i" }}, {artist: { $regex: `${substring}`, $options: "i" }}, {genre: { $regex: `${substring}`, $options: "i" }}] };
+      filter = { $or: [{ name: { $regex: `${substring}`, $options: "i" } }, { artist: { $regex: `${substring}`, $options: "i" } }, { genre: { $regex: `${substring}`, $options: "i" } }] };
     }
     const songs = await this.collection.find(filter).toArray();
     return songs;
