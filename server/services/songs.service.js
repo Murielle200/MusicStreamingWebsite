@@ -65,9 +65,17 @@ class SongService {
   async search (substring, exact) {
     let filter = {};
     if (exact) {
-      filter = { $or: [{ name: { $regex: `${substring}` } }, { artist: { $regex: `${substring}` } }, { genre: { $regex: `${substring}` } }] };
+      filter = {
+        $or: [{ name: { $regex: `${substring}` } },
+          { artist: { $regex: `${substring}` } },
+          { genre: { $regex: `${substring}` } }]
+      };
     } else {
-      filter = { $or: [{ name: { $regex: `${substring}`, $options: "i" } }, { artist: { $regex: `${substring}`, $options: "i" } }, { genre: { $regex: `${substring}`, $options: "i" } }] };
+      filter = {
+        $or: [{ name: { $regex: `${substring}`, $options: "i" } },
+          { artist: { $regex: `${substring}`, $options: "i" } },
+          { genre: { $regex: `${substring}`, $options: "i" } }]
+      };
     }
     const songs = await this.collection.find(filter).toArray();
     return songs;
