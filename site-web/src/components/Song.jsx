@@ -14,14 +14,13 @@ export default function Song({ song, index }) {
   };
 
   // TODO : envoyer une action PLAY avec le bon index au reducer.
-  const playSong = () => { dispatch({ type: ACTIONS.PLAY, payload: { index: parseInt(index) } }) };
+  const playSong = () => { dispatch({ type: ACTIONS.PLAY, payload: { index: index } }) };
   return (
     <section
       className="song-item flex-row"
       onClick={() => {
         {/*TODO : jouer une chanson seulement si index existe */}
-          playSong;
-          console.log(index);
+          index !== undefined ? playSong(--index) : () => {}
       }}
     >
       {index ? <span>{index}</span> : <></>}
