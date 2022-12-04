@@ -9,7 +9,7 @@ export default function Playlist({ playlist }) {
       <div className="playlist-preview">
         {/*TODO : ajouter l'image de la playlist 
         // NOT DONE */}
-        <img alt="" src={`${SERVER_URL/playlist.thumbnail}`} />
+        <img alt="" src={`${SERVER_URL}/${playlist.thumbnail}`} />
         <i className="fa fa-2x fa-play-circle hidden playlist-play-icon"></i>
       </div>
       {/*TODO : ajouter les informations de la playlist */}
