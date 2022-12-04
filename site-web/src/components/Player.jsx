@@ -27,12 +27,12 @@ export default function Player() {
 
   // TODO : ajouter une action de déplacement dans la barre de progrès
   const seek = (newTime) => {
-    dispatch({type: ACTIONS.SEEK});
+    dispatch({type: ACTIONS.SEEK, payload: {time: newTime}});
   };
 
   // TODO : ajouter une action d'avancement/recul dans la chanson
   const scrubTime = (delta) => {
-    dispatch({type: ACTIONS.SCRUB});
+    dispatch({type: ACTIONS.SCRUB, payload: {delta: delta}});
   };
 
   // TODO : ajouter une action de fermer/ouvrir le son

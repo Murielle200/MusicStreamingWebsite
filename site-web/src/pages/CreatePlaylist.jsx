@@ -36,7 +36,7 @@ export default function CreatePlaylist() {
     });
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     if (!data.name || !data.description || !data.thumbnail) return;
     // TODO : envoyer la bonne requête pour ajouter ou modifier une playlist en fonction de l'attribut params.id
@@ -44,10 +44,10 @@ export default function CreatePlaylist() {
 
     navigate("/index");
     if(!params.id) {
-      await api.addNewPlaylist(data);
+      api.addNewPlaylist(data);
     }
     else {
-      await api.updatePlaylist(data);
+      api.updatePlaylist(data);
     }
   };
 
@@ -127,7 +127,7 @@ export default function CreatePlaylist() {
   // DONE ?
   const deletePlaylist = async (id) => {
     navigate("/index");
-    await api.deletePlaylist(id);
+    api.deletePlaylist(id);
   };
 
   const loadForEdit = async (playlist) => {
