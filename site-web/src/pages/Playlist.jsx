@@ -9,7 +9,7 @@ export default function Playlist() {
   // TODO : récupérer une référence vers l'instance de HTTPManager
   // DONE
   const api = useContext(PlaylistContext).api;
-
+  let counter = 0;
   const params = useParams();
   const [playlist, setPlaylist] = useState({});
   const [songs, setSongs] = useState([]);
@@ -52,7 +52,7 @@ export default function Playlist() {
           Chaque chanson doit avoir un numéro commençant par 1 qui indique son ordre dans la liste*/
           // NOT DONE
           songs.map((song) => (
-            < Song key={song.id} song={song} />
+            < Song key={song._id} song={song} index={++counter} />
           ) )
           }
         </section>
