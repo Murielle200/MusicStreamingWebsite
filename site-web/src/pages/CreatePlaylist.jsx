@@ -39,8 +39,6 @@ export default function CreatePlaylist() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!data.name || !data.description || !data.thumbnail) return;
-    // TODO : envoyer la bonne requête pour ajouter ou modifier une playlist en fonction de l'attribut params.id
-    // DONE
 
     if(!params.id) {
       await api.addNewPlaylist(data);
@@ -103,18 +101,14 @@ export default function CreatePlaylist() {
     setData({ ...data, songs: allSongs });
   };
 
-  // TODO : Gérer le changement de nom
-  // DONE
   const handleNameChange = (event) => {
     const changedName = event.target.value;
-    setData({ ...data, name: changedName}); // not sure
+    setData({ ...data, name: changedName}); 
   };
 
-  // TODO : Gérer le changement de description
-  // DONE
   const handleDescriptionChange = (event) => {
     const changedDescription = event.target.value;
-    setData({...data, description: changedDescription}); // not sure
+    setData({...data, description: changedDescription}); 
   };
 
   const handleFileChange = async (event) => {
@@ -123,8 +117,6 @@ export default function CreatePlaylist() {
     setData({ ...data, thumbnail: image });
   };
 
-  // TODO : Envoyer une requête de supression au serveur et naviguer vers la page principale
-  // DONE ?
   const deletePlaylist = async (id) => {
     api.deletePlaylist(id);
     navigate("/index");
@@ -150,9 +142,6 @@ export default function CreatePlaylist() {
             <legend>Informations générales</legend>
             <div className="form-control flex-row">
               <label htmlFor="name">Nom: </label>
-              {/*TODO : lier au nom de la playlist */
-              // DONE
-              }
               <input
                 type="text"
                 id="name"
@@ -164,9 +153,6 @@ export default function CreatePlaylist() {
             </div>
             <div className="form-control flex-row">
               <label htmlFor="description">Description: </label>
-              {/*TODO : lier à la description de la playlist */
-              // DONE
-              }
               <input
                 type="text"
                 id="description"
@@ -185,8 +171,6 @@ export default function CreatePlaylist() {
         </div>
         <fieldset className="form-control">
           <legend>Chansons</legend>
-          {/*TODO : construire les choix de chansons dans des éléments <option> 
-          // NOT REALLY DONE */}
           <datalist id="song-dataList">
             {songs.map((song) => {
               return <option value ={song.name}/>
@@ -212,7 +196,6 @@ export default function CreatePlaylist() {
             ))}
           </div>
         </fieldset>
-        {/*TODO : afficher "Modifier la playlist" ou "Ajouter la playlist" en fonction de l'état du formulaire */}
         <input type="submit" value={params.id ? "Modifier la playlist" : "Ajouter la playlist"} onClick={handleSubmit} id="playlist-submit" />
       </form>
       {params.id ? (
