@@ -33,9 +33,10 @@ export default function Index() {
     event.preventDefault();
     // TODO : implémenter la recherche et la mise à jour de l'interface
     // DONE
+    console.log(query);
     const searchResults = await api.search(query, exactMatch);
-    this.setPlaylists(searchResults.playlist);
-    this.setSongs(searchResults.songs);
+    setPlaylists(searchResults.playlists);
+    setSongs(searchResults.songs);
   };
 
   return (

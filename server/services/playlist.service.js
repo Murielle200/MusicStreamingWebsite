@@ -131,9 +131,9 @@ class PlaylistService {
   async search (substring, exact) {
     let filter = {};
     if (exact) {
-      filter = { $or: [{ name: { $regex: `${substring}` }}, {description: { $regex: `${substring}` }} ]};
+      filter = { $or: [{ name: { $regex: `${substring}` } }, { description: { $regex: `${substring}` } }] };
     } else {
-      filter = { $or: [{ name: { $regex: `${substring}`, $options: "i" }}, {description: { $regex: `${substring}`, $options: "i" }}] };
+      filter = { $or: [{ name: { $regex: `${substring}`, $options: "i" } }, { description: { $regex: `${substring}`, $options: "i" } }] };
     }
     const playlists = await this.collection.find(filter).toArray();
     return playlists;
