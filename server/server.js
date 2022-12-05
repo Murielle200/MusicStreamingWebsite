@@ -31,15 +31,9 @@ app.use("/api/search", searchBarRouter.router);
 
 const server = app.listen(PORT, () => {
   dbService.connectToServer(DB_CONSTS.DB_URL).then(async () => {
-    // NOTE: arrow function needs to be async if we use async functions inside it
-
-    // TODO : populer la BD avec les valeurs par défaut
-    // eslint-disable-next-line no-console
-
     const playlistsService = new PlaylistService();
     await playlistsService.populateDb();
 
-    // eslint-disable-next-line no-console
     console.log(`Listening on port ${PORT}.`);
   });
 });

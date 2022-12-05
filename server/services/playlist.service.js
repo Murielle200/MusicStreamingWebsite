@@ -16,21 +16,10 @@ class PlaylistService {
     return this.dbService.db.collection(DB_CONSTS.DB_COLLECTION_PLAYLISTS);
   }
 
-  /**
-   * TODO : Implémenter la récupération de toutes les playlists
-   * Retourne toutes les playlists disponibles
-   * @returns {Promise<Array>} la liste de toutes les playlists
-   */
   async getAllPlaylists () {
     return this.collection.find().toArray();
   }
 
-  /**
-   * TODO : Implémenter la récupération d'une playlist en fonction de son id
-   * Retourne une playlist en fonction de son id
-   * @param {string} id
-   * @returns Retourne la playlist en fonction de son id
-   */
   async getPlaylistById (id) {
     const allPlaylists = await this.getAllPlaylists();
     const playlist = allPlaylists.find((playlist) => playlist.id === id);
@@ -40,12 +29,6 @@ class PlaylistService {
     return playlist;
   }
 
-  /**
-   * TODO : Implémenter l'ajout d'une nouvelle playlist
-   * Ajoute une playlist dans le fichier de toutes les playlists
-   * @param {Object} playlist nouvelle playlist à ajouter
-   * @returns retourne la playlist ajoutée
-   */
   async addPlaylist (playlist) {
     playlist.id = randomUUID();
     await this.savePlaylistThumbnail(playlist);
@@ -53,13 +36,8 @@ class PlaylistService {
     return playlist;
   }
 
-  /**
-   * TODO : Implémenter la mise à jour d'une playlit existante
-   * Modifie une playlist en fonction de son id et met à jour le fichier de toutes les playlists
-   * @param {Object} playlist nouveau contenu de la playlist
-   */
   async updatePlaylist (playlist) {
-    delete playlist._id; // _id est immutable
+    delete playlist._id;
     await this.savePlaylistThumbnail(playlist);
     await this.collection.findOneAndReplace({ id: playlist.id }, playlist);
   }
@@ -118,16 +96,6 @@ class PlaylistService {
     playlist.thumbnail = thumbnailFileName;
   }
 
-  /**
-   * TODO : Implémenter la recherche pour les 3 champs des playlists. Astuce : utilisez l'opérateur '$or' de MongoDB
-   *
-   * Cherche et retourne les playlists qui ont un mot clé spécifique dans leur description (name, description)
-   * Si le paramètre 'exact' est TRUE, la recherche est sensible à la case
-   * en utilisant l'option "i" dans la recherche par expression régulière
-   * @param {string} substring mot clé à chercher
-   * @param {boolean} exact si la recherche est sensible à la case
-   * @returns toutes les playlists qui ont le mot clé cherché dans leur contenu (name, description)
-   */
   async search (substring, exact) {
     let filter = {};
     if (exact) {
