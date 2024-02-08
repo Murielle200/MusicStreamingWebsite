@@ -1,58 +1,29 @@
-# TP5
+# Music Streaming Website project
 
-Le but de ce travail pratique est de vous familiariser avec le développement d'une application web full stack utilisant une base de données pour assurer la persistance des données. Pour ce faire, vous utiliserez la librairie React pour le côté client et vous vous connecterez à une base de données MongoDB à partir d'un environnement NodeJS/Express pour le côté serveur.
+This project is a 2 people group project using a React library for the client-side and a MongoDB database with a NodeJS/Express environment for the server-side.
 
-## Structure du projet
+## Project Structure
 
-Pour ce travail pratique, le code source contient deux applications distinctes, soit une application ReactJS côté client (répertoire `client`) ainsi qu'une application NodeJS/Express côté serveur (répertoire `site-web`). L'application React est constituée de composantes qui se retrouvent dans les répertoires `components` et `pages`. Les fichiers statiques tels que la page HTML de base se trouve dans `/public`. Au lancement de l'application, c'est le fichier `index.jsx` qui sera exécuté.
+For this practical work, the source code contains two distinct applications: a ReactJS client-side application (in the `client` directory) and a NodeJS/Express server-side application (in the `site-web` directory). The React application consists of components found in the `components` and `pages` directories. Static files such as the base HTML page are located in `/public`. Upon launching the application, the `index.jsx` file will be executed.
 
-Le serveur, pour sa part, comprend des contrôleurs, des services et des données par défaut que vous pourrez retrouver dans `server/controllers`, `server/services` et `server/data`. C'est le fichier `server.js` qui sera exécuté au lancement du serveur.
+The server, on the other hand, includes controllers, services, and default data that you can find in `server/controllers`, `server/services`, and `server/data`, respectively. The `server.js` file will be executed when launching the server.
 
-## Configuration de la base de données
+## Installation of Required Libraries
 
-Vous devez configurer une instance MongoDB pour la persistance de vos données. Vous devez utiliser le service [Cloud Atlas](https://www.mongodb.com/cloud/atlas) qui permet d'héberger des instances d'une taille de 512 MB gratuitement.
+To install the necessary dependencies, run the `npm ci` command in the root of each application (thus twice in total). This will install all the libraries defined in the `package-lock.json` file. You can then use the test libraries (for the server) and the scripts defined in the same file.
 
-Vous devez configurer votre instance avant de pouvoir effectuer le travail demandé. Un guide pour la configuration d'instances MongoDB avec Cloud Atlas est disponible sur le projet [GitHub du cours](https://github.com/LOG2440/Cours-11-MongoDB/blob/master/README.MD) de l'exemple sur MongoDB présenté en classe.
+## Local Deployment
 
-## Installation des librairies nécessaires
+During development, you can locally deploy your ReactJS application and your Express server with the `npm start` command. Note that you need to execute the command at the root of each application (in `/site-web` and `/server`) in two distinct consoles so that both work in parallel.
 
-Pour pouvoir installer les librairies nécessaires pour le TP, vous aurez besoin de l'environnement d'exécution NodeJS et le gestionnaire de paquet npm. Vous pouvez les installer sur votre machine à partir du [lien suivant](https://nodejs.org/en/download/). On vous recommande d'installer la version _LTS_.
+The React application will be launched at `localhost:5010` (or `<your-IP-address>:5010`), where you can view your website. The server will be deployed at `localhost:5020` and will start listening on port 5020.
 
-Pour installer les dépendances nécessaires, lancez la commande `npm ci` dans la racine de chaque application (et donc deux fois au total). Ceci installera toutes les librairies définies dans le fichier `package-lock.json`. Vous pouvez par la suite utiliser les libraires de test (pour le serveur) et les scripts définis dans le même fichier.
+## Running Tests
 
-## Déploiement local
+The server source code comes with a series of tests that verify the interactions between your server and a MongoDB instance. The test source code is available in the `server/tests` directory.
 
-Lors du développement, vous pouvez faire un déploiement local de votre application ReactJS et de votre serveur Express avec la commande `npm start`. Notez bien qu'il faut exécuter la commande à la racine de chaque application (dans `/site-web` et `/server`) dans deux consoles distinctes afin que les deux fonctionnent en parallèle.
+You can run automated unit tests with the `npm test` command. This will execute the tests and produce a report in your terminal.
 
-L'application React sera lancée à l'adresse `localhost:5010` (ou `<votre-adresse IP>:5010`) et vous pourrez donc visualiser votre site web à cette même adresse. Le serveur sera déployé à l'adresse `localhost:5020` et commencera à écouter le port 5020.
+## Song List
 
-## Exécution des tests
-
-Le code source du serveur est accompagné d'une série de tests qui permettent de vérifier les interactions entre votre serveur et une instance MongoDB. Le code source des tests est disponible dans le répertoire `server/tests`.
-
-Les tests unitaires utilisent la librairie _Jest_ que vous avez utilisée tout au long de la session. La librairie _MongoMemoryServer_ est utilisée pour remplacer une vraie instance de MongoDB par une instance _mocked_ pour les tests. Il est très important de se connecter à une base de données locale et contrôlée et non à votre instance MongoDB déployée en mode **production** pendant vos tests.
-
-Vous êtes fortement encouragés de consulter les tests fournis. Ils vous aideront à mieux comprendre le travail à faire et le bon comportement du serveur.
-
-Vous pouvez exécuter les tests unitaires automatisés avec la commande `npm test`. Ceci exécutera les tests et produira un rapport dans votre terminal.
-
-Auncun test n'est fourni pour le côté client de votre site web dans le cadre de ce travail pratique. Nous vous recommandons de tester manuellement les différentes fonctionnalités pour vous assurer de leur bon fonctionnement et vérifier que chaque élément UI de votre page web se situe au bon endroit et est inchangé depuis le dernier travail pratique.
-
-## Liste de chansons
-
-Les fichiers des chansons initiales sont disponibles dans le répertoire `assets/media`. Les chansons sont libres de droits et obtenues du site [pixabay](https://pixabay.com/music/). Vous pouvez ajouter des chansons supplémentaires à votre remise si vous voulez en vous assurant de mettre à jour l'information des chansons dans le fichier `songs.json` dans le répertoire `data` de votre serveur.
-
-# Correction
-
-| **Exigences**                                 | **Note** | **Points** |
-| --------------------------------------------- | :------: | :--------: |
-| Implémentation des services du serveur        |    6     |     6      |
-| Implémentation des composantes de pages React |    5     |     5      |
-| Implémentation des autres composantes React   |    5     |     5      |
-| Structure du code                             |    2     |     2      |
-| Qualité et clarté du code                     |    2     |     2      |
-| **Total**                                     |  **20**  |   **20**   |
-
-Tous les tests passent côté serveur, bravo! Le linter passe avec succès, bravo!
-
-Le site-web fonctionne parfaitement, bravo!
+The files of the initial songs are available in the `assets/media` directory. The songs are royalty-free and obtained from the [pixabay](https://pixabay.com/music/) website. You can add additional songs to your submission if you wish, ensuring to update the song information in the `songs.json` file in the `data` directory of your server.
